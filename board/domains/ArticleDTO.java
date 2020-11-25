@@ -9,11 +9,16 @@ public class ArticleDTO {
     private String content;
     private Calendar writtenDate;
     private Calendar updatedDate;
-
-    public int getId() {
+    public ArticleDTO(){}
+    public ArticleDTO(int writerId,String title,String content){
+        this.writerId = writerId;
+        this.title = title;
+        this.content = content;
+    }
+    public int getArtId() {
         return artId;
     }
-    public void setId(int artId) {
+    public void setArtId(int artId) {
         this.artId = artId;
     }
     public int getWriterId() {

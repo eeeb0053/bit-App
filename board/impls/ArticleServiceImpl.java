@@ -35,7 +35,11 @@ public class ArticleServiceImpl implements ArticleService {
 
 
     }
-
+    
+    @Override
+    public ArticleDTO[] fetchArticleList(){
+        return null;
+    }
     @Override
     public ArticleDTO readArticle(int artId) {
 

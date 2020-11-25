@@ -31,6 +31,9 @@ public class ArticleController {
     public ReplyDTO[] getReply(int artId){
         return articleService.readReply(artId);
     } 
+    public ArticleDTO[] getArticleList(){
+        return articleService.fetchArticleList();
+    }
 }
 
 

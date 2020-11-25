@@ -10,5 +10,7 @@ public interface ArticleService{
     public void writeReply(ReplyDTO reply);
     public void removeReply(ReplyDTO reply);
     public ArticleDTO readArticle(int artId);
-    public ReplyDTO[] readReply(int artId);    
+    public ArticleDTO[] fetchArticleList();
+    public ReplyDTO[] readReply(int artId);
+
 }

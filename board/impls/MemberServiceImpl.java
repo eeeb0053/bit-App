@@ -49,7 +49,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public StudentDTO fetchStudentDetail(String userId) {
+    public StudentDTO fetchStudentDetail(int userId) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -67,7 +67,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public boolean existId(String userId) {
+    public boolean existId(int userId) {
         // TODO Auto-generated method stub
         return false;
     }

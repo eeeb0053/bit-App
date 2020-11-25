@@ -1,8 +1,15 @@
 package board;
 
+import java.util.Random;
 import java.util.Scanner;
 
+import board.controllers.ArticleController;
+import board.controllers.MemberController;
 import board.domains.ArticleDTO;
+import board.domains.MemberDTO;
+import board.domains.ReplyDTO;
+import board.domains.StudentDTO;
+import board.domains.TeacherDTO;
 
 /*
 << RFP >>
@@ -48,7 +55,13 @@ SimpleDateFormat sdf = new SimpleDateFormat("y-M-d H:m:s");
 public class Application {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArticleController controller = new ArticleController
+        ArticleController articleController = new ArticleController();
+        MemberController memberController = new MemberController();
+        StudentDTO student = null;
+        TeacherDTO teacher = null;
+        ArticleDTO article = null;
+        ReplyDTO reply = null;
+        MemberDTO member = null;
         String title = "비트 성적관리 프로그램\n";
         String navi = "[학생 UI]\n"
         +"01.학생등록 02.아이디중복체크 03.학생로그인 04.학생정보수정 05.학생정보삭제\n"
@@ -61,41 +74,90 @@ public class Application {
         while(true){
             System.out.println(title+navi);
             switch (scanner.next()) {
-                case "01": 
+                case "01":
+                    System.out.println("Number, PW, ID, NickName");
+                    memberController.postStudent(
+                        new StudentDTO(new Random().nextInt(100) + 1, scanner.next(), scanner.next(), scanner.next())
+                    );
                     break;
                 case "02":
+                    System.out.println("가입하려는 아이디");
+                    boolean ok = memberController.getExistId(scanner.nextInt());
+                    System.out.println(
+                            ok
+                                ? "사용 가능"
+                                : "사용 불가능"
+                        );
+                    member = new MemberDTO();
+                    boolean exist = memberController.getExistId(member.getUserId());
                     break;
                 case "03":
+                    student = new StudentDTO();
+                    memberController.postLogin(student);
                     break;
                 case "04": 
+                    student = new StudentDTO();
+                    memberController.updateStudent(student);
                     break;
                 case "05": 
+                    student = new StudentDTO();
+                    memberController.deleteStudent(student);
                     break;
                 case "11": 
+                    teacher = new TeacherDTO();
+                    memberController.postTeacher(teacher);
                     break;
                 case "12": 
+                    teacher = new TeacherDTO();
+                    memberController.postAccess(teacher);
                     break;
                 case "13": 
+                    memberController.getStudentList();
                     break;
                 case "14": 
+                    member = new MemberDTO();
+                    memberController.getStudentDetail(member.getUserId());
                     break;
                 case "15": 
+                    student = new StudentDTO();
+                    memberController.getSum(student);
                     break;
                 case "16": 
+                    student = new StudentDTO();
+                    memberController.getAvg(memberController.getSum(student));
                     break;
                 case "21": 
+                    System.out.println("글쓴이 아이디,제목,내용");
+                    articleController.postArticle(new ArticleDTO(
+                        scanner.nextInt(),
+                        scanner.next(),
+                        scanner.next()
+                    ));
+                    article = new ArticleDTO();
+                    articleController.postArticle(article);
                     break;
                 case "22": 
+                    articleController.getArticleList();
                     break;
                 case "23": 
+                    article = new ArticleDTO();
+                    articleController.getArticle(article.getArtId());
                     break;
                 case "24": 
+                    article = new ArticleDTO();
+                    articleController.updateArticle(article);
                     break;
                 case "25": 
+                    article = new ArticleDTO();
+                    articleController.deleteArticle(article);
                     break;
                 case "26": 
+                    reply = new ReplyDTO();
+                    articleController.postReply(reply);
                     break;
                 case "27": 
+                    reply = new ReplyDTO();
+                    articleController.deleteReply(reply);
                     break;
                 case "0":
                     System.out.println("시스템 종료");
